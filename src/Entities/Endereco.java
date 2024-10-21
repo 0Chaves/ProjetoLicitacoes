@@ -6,7 +6,7 @@ public class Endereco {
 	private String rua;
 	private int numero;
 	
-	public Endereco (String UF, String municipio, String rua, int numero) {
+	public Endereco (String UF, String municipio, String rua, String numero) {
 		setUF(UF);
 		setMunicipio(municipio);
 		setRua(rua);
@@ -41,8 +41,8 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-	private void setNumero(int numero) {
-		this.numero = numero;
+	private void setNumero(String numero) {
+		this.numero = Integer.parseInt(numero);
 	}
 	
 }

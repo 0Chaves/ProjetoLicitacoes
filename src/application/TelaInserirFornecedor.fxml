@@ -11,11 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaFornecedorController">
   <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="626.0" prefWidth="690.0">
          <children>
-            <Button blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="385.0" layoutY="346.0" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Submit" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Button fx:id="botao_enviar" blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="385.0" layoutY="346.0" onAction="#enviar" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Enviar" textOverrun="CENTER_WORD_ELLIPSIS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -35,18 +35,18 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <Button blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="288.0" layoutY="346.0" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Voltar" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Button fx:id="botao_voltar" blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="288.0" layoutY="346.0" onAction="#voltar" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Voltar" textOverrun="CENTER_WORD_ELLIPSIS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <TextArea layoutX="134.0" layoutY="123.0" prefHeight="18.0" prefWidth="200.0" promptText="Nome" />
-            <TextArea layoutX="134.0" layoutY="171.0" prefHeight="18.0" prefWidth="200.0" promptText="Cnpj" />
-            <TextArea layoutX="134.0" layoutY="225.0" prefHeight="18.0" prefWidth="200.0" promptText="E-mail" />
-            <TextArea layoutX="134.0" layoutY="284.0" prefHeight="18.0" prefWidth="200.0" promptText="Telefone" />
-            <TextArea layoutX="396.0" layoutY="122.0" prefHeight="18.0" prefWidth="200.0" promptText="Uf" />
-            <TextArea layoutX="396.0" layoutY="171.0" prefHeight="18.0" prefWidth="200.0" promptText="Municipio" />
-            <TextArea layoutX="396.0" layoutY="225.0" prefHeight="18.0" prefWidth="200.0" promptText="Rua" />
-            <TextArea layoutX="396.0" layoutY="284.0" prefHeight="18.0" prefWidth="200.0" promptText="Numero" />
+            <TextArea fx:id="inputNome" layoutX="134.0" layoutY="123.0" prefHeight="18.0" prefWidth="200.0" promptText="Nome" />
+            <TextArea fx:id="inputCnpj" layoutX="134.0" layoutY="171.0" prefHeight="18.0" prefWidth="200.0" promptText="Cnpj" />
+            <TextArea fx:id="inputEmail" layoutX="134.0" layoutY="225.0" prefHeight="18.0" prefWidth="200.0" promptText="E-mail" />
+            <TextArea fx:id="inputTelefone" layoutX="134.0" layoutY="284.0" prefHeight="18.0" prefWidth="200.0" promptText="Telefone" />
+            <TextArea fx:id="inputUf" layoutX="396.0" layoutY="122.0" prefHeight="18.0" prefWidth="200.0" promptText="Uf" />
+            <TextArea fx:id="inputMunicipio" layoutX="396.0" layoutY="171.0" prefHeight="18.0" prefWidth="200.0" promptText="Municipio" />
+            <TextArea fx:id="inputRua" layoutX="396.0" layoutY="225.0" prefHeight="18.0" prefWidth="200.0" promptText="Rua" />
+            <TextArea fx:id="inputNumero" layoutX="396.0" layoutY="284.0" prefHeight="18.0" prefWidth="200.0" promptText="Numero" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />

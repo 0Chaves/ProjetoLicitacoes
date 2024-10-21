@@ -1,4 +1,4 @@
-package application;
+package Controller;
 
 import java.io.IOException;
 
@@ -26,20 +26,29 @@ public class TelaController {
     @FXML
     void trocar_tela_inserir_fornecedor(ActionEvent event) {
     	try {
-			root = (VBox)FXMLLoader.load(getClass().getResource("TelaInserirFornecedor.fxml"));
+			root = (VBox)FXMLLoader.load(getClass().getResource("/application/TelaInserirFornecedor.fxml"));
 			scene = new Scene(root);
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
 
     @FXML
     void trocar_tela_inserir_item(ActionEvent event) {
-
+    	try {
+    		root = (VBox)FXMLLoader.load(getClass().getResource("/application/TelaInserirItem.fxml"));
+    		scene = new Scene(root);
+    		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		stage.setScene(scene);
+			stage.show();
+    	} catch (IOException e) {
+    	 	e.printStackTrace();
+    	}
     }
 
+    
 }

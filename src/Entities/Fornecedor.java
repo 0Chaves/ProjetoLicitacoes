@@ -1,4 +1,5 @@
 package Entities;
+import java.io.IOException;
 import java.util.Objects;
 
 public class Fornecedor {
@@ -8,12 +9,12 @@ public class Fornecedor {
 	private String email;
 	private String telefone;
 	
-	public Fornecedor(String nome, String cnpj, Endereco endereco, String email, String telefone) {
-		setNome(nome);
-		setCnpj(cnpj);
-		setEndereco(endereco);
-		setEmail(email);
-		setTelefone(telefone);
+	public Fornecedor(String nome, String cnpj, Endereco endereco, String email, String telefone) throws IOException {
+			setNome(nome);
+			setCnpj(cnpj);
+			setEndereco(endereco);
+			setEmail(email);
+			setTelefone(telefone);	
 	}
 	
 	
@@ -32,7 +33,8 @@ public class Fornecedor {
 	public String getTelefone() {
 		return telefone;
 	}
-	private void setNome(String nome) {
+	private void setNome(String nome) throws IOException {
+		if(nome==null) throw new IOException("Nome deve ser preenchido");
 		this.nome = nome;
 	}
 	private void setCnpj(String cnpj) {
