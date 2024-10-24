@@ -3,12 +3,15 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Fornecedor {
+	private int id;
 	private String nome;
 	private String cnpj;
 	private Endereco endereco;
 	private String email;
 	private String telefone;
 	
+	
+	//Construtor para cadastrar um novo fornecedor (id gerado pelo BD)
 	public Fornecedor(String nome, String cnpj, Endereco endereco, String email, String telefone) throws IOException {
 			setNome(nome);
 			setCnpj(cnpj);
@@ -17,7 +20,17 @@ public class Fornecedor {
 			setTelefone(telefone);	
 	}
 	
-	
+	//Construtor para buscar um fornecedor (recupera o id fornecido pelo BD)
+	public Fornecedor(int id, String nome, String cnpj, Endereco endereco, String email, String telefone) throws IOException {
+		setId(id);
+		setNome(nome);
+		setCnpj(cnpj);
+		setEndereco(endereco);
+		setEmail(email);
+		setTelefone(telefone);	
+}
+
+	//GETTERS
 	public String getNome() {
 		return nome;
 	}
@@ -33,6 +46,12 @@ public class Fornecedor {
 	public String getTelefone() {
 		return telefone;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	//SETTERS
 	private void setNome(String nome) throws IOException {
 		if(nome==null) throw new IOException("Nome deve ser preenchido");
 		this.nome = nome;
@@ -49,6 +68,11 @@ public class Fornecedor {
 	private void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	private void setId(int id) {
+		this.id = id;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {
