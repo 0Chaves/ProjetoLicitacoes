@@ -19,11 +19,8 @@ public class Endereco {
 	
 	//Construtor para buscar um fornecedor (recupera o id fornecido pelo BD)
 	public Endereco (int id, String UF, String municipio, String rua, int numero) {
+		this(UF,municipio,rua,numero);
 		setId(id);
-		setUF(UF);
-		setMunicipio(municipio);
-		setRua(rua);
-		setNumero(numero);
 	}
 
 //GETTERS
@@ -56,7 +53,7 @@ public class Endereco {
 	private void setNumero(int numero) {
 		this.numero = numero;
 	}
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -71,7 +71,7 @@ public class TelaFornecedorController {
     @FXML
     void enviar(ActionEvent event) {
     	try {
-    		Endereco endereco = new Endereco(inputUf.getText(), inputMunicipio.getText(), inputRua.getText(), inputNumero.getText());
+    		Endereco endereco = new Endereco(inputUf.getText(), inputMunicipio.getText(), inputRua.getText(), Integer.parseInt(inputNumero.getText()));
     		Fornecedor f = new Fornecedor(inputNome.getText(), inputCnpj.getText(), endereco, inputEmail.getText(), inputTelefone.getText());
     	}catch(IOException e) {
     		e.printStackTrace();

@@ -3,7 +3,6 @@ package DAO;
 import java.sql.Connection;
 import java.util.List;
 
-import Entities.ConnectionFactory;
 import Entities.Item;
 
 public class ItemDAO implements Interface_DAO<Item> {

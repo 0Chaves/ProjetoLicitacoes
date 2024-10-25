@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
-import Entities.ConnectionFactory;
 import Entities.Endereco;
 
 public class EnderecoDAO implements Interface_DAO<Endereco> {
@@ -22,9 +22,15 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 				pstm.setString(1, object.getMunicipio());
 				pstm.setString(2, object.getRua());
 				pstm.setInt(3, object.getNumero());
-				return pstm.execute();
+				pstm.execute();
+				ResultSet generated_id = pstm.getResultSet();
+				if(generated_id.next()) {
+					object.setId(generated_id.getInt("id"));
+				}
+				generated_id.close();
+				return true;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 		return false;
@@ -49,15 +55,15 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		Connection con = ConnectionFactory.getConnection();
 		String query = "UPDATE endereco SET \"UF\" = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
 		try {
-			PreparedStatement pstm = con.prepareStatement(query);
+			PreparedStatement pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(0, object.getUF());
 			pstm.setString(1, object.getMunicipio());
 			pstm.setString(2, object.getRua());
 			pstm.setInt(3, object.getNumero());
 			pstm.setInt(4, object.getId());
-			return pstm.execute();
+			pstm.execute();
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return false;
 	}
@@ -86,7 +92,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 				return endereco;
 			}
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return null;
 	}
