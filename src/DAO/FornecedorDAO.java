@@ -17,7 +17,7 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		if(object instanceof Fornecedor) {
 			Connection con = ConnectionFactory.getConnection();
 			try {
-				String query = "INSERT INTO fornecedores (\"nome\",\"cnpj\",\"id_endereco\",\"email\",\"telefone\") VALUES (?,?,?,?,?)";
+				String query = "INSERT INTO fornecedores (nome, cnpj, id_endereco, email, telefone) VALUES (?,?,?,?,?)";
 				PreparedStatement pstm = con.prepareStatement(query);
 				pstm.setString(0, object.getNome());
 				pstm.setString(1, object.getCnpj());

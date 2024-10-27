@@ -14,7 +14,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 	@Override
 	public boolean insert(Endereco object) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "INSERT INTO endereco (\"UF\",municipio, rua, numero) VALUES (?,?,?,?)";
+		String query = "INSERT INTO endereco (\"UF\", municipio, rua, numero) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setString(0, object.getUF());

@@ -9,7 +9,7 @@ import java.util.List;
 
 import Entities.Categoria;
 
-public class Categoria_DAO implements Interface_DAO<Categoria>{
+public class CategoriaDAO implements Interface_DAO<Categoria>{
 
 	@Override
 	public boolean insert(Categoria object) {
