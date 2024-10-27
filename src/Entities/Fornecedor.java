@@ -28,7 +28,7 @@ public class Fornecedor {
 		setEndereco(endereco);
 		setEmail(email);
 		setTelefone(telefone);	
-}
+	}
 
 	//GETTERS
 	public String getNome() {

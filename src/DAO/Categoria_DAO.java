@@ -7,20 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import Entities.Endereco;
+import Entities.Categoria;
 
-public class EnderecoDAO implements Interface_DAO<Endereco> {
+public class Categoria_DAO implements Interface_DAO<Categoria>{
 
 	@Override
-	public boolean insert(Endereco object) {
+	public boolean insert(Categoria object) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "INSERT INTO endereco (\"UF\",municipio, rua, numero) VALUES (?,?,?,?)";
+		String query = "INSERT INTO categorias (nome) VALUES (?)";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getUF());
-			pstm.setString(1, object.getMunicipio());
-			pstm.setString(2, object.getRua());
-			pstm.setInt(3, object.getNumero());
+			pstm.setString(0, object.getNome());
 			pstm.execute();
 			ResultSet generated_id = pstm.getResultSet();
 			if(generated_id.next()) {
@@ -37,15 +34,17 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		}
 		/*TODO:
 		 * Criar outras Exceptions para retornar False caso ocorra invalidação de input
-		 * 
-		 * Perguntar por que nao pode botar um return false aqui********
 		 */
 	}
 
+	
+	/*TODO:
+	 * Criar uma dupla verificação antes de excluir uma categoria ou adaptar os itens para outra categoria ou excluir todos
+	 */
 	@Override
 	public boolean delete(int id) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "DELETE FROM endereco WHERE id = ?";
+		String query = "DELETE FROM categorias WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setInt(0, id);
@@ -56,21 +55,14 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		return false;
 	}
 
-	
-	/*TODO:
-	 * Criar um objeto temporario para fazer essa alteração
-	 */
 	@Override
-	public boolean update(Endereco object) {
+	public boolean update(Categoria object) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "UPDATE endereco SET \"UF\" = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
+		String query = "UPDATE categorias SET nome = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getUF());
-			pstm.setString(1, object.getMunicipio());
-			pstm.setString(2, object.getRua());
-			pstm.setInt(3, object.getNumero());
-			pstm.setInt(4, object.getId());
+			pstm.setString(0, object.getNome());
+			pstm.setInt(1, object.getId());
 			pstm.execute();
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -79,32 +71,29 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 	}
 
 	@Override
-	public List<Endereco> list(int limit, int offset) {
+	public List list(int limit, int offset) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Endereco get(int id) {
+	public Categoria get(int id) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "SELECT * FROM endereco WHERE id = ?";
+		String query = "SELECT * FROM categorias WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setInt(0, id);
 			ResultSet result = pstm.executeQuery();
 			if(result.next()) {
-				int id_fornecedor = result.getInt("id");
-				String uf = result.getString("UF");
-				String municipio = result.getString("municipio");
-				String rua = result.getString("rua");
-				int numero = result.getInt("numero");
-				Endereco endereco = new Endereco(id_fornecedor, uf, municipio, rua, numero);
-				return endereco;
+				int id_categoria = result.getInt("id");
+				String nome = result.getString("nome");
+				Categoria categoria = new Categoria(id_categoria, nome);
+				return categoria;
 			}
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
 		return null;
 	}
-	
+
 }

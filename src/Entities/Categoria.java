@@ -4,10 +4,12 @@ public class Categoria {
 	private int id;
 	private String nome;
 	
+	//Construtor para cadastrar um novo fornecedor (id gerado pelo BD)
 	public Categoria(String nome) {
 		setNome(nome);
 	}
 	
+	//Construtor para buscar um fornecedor (recupera o id fornecido pelo BD)
 	public Categoria(int id, String nome) {
 		setId(id);
 		setNome(nome);
@@ -25,7 +27,7 @@ public class Categoria {
 	private void setNome(String nome) {
 		this.nome = nome.toUpperCase();
 	}
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
