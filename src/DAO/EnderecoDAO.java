@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
+import Entities.Categoria;
 import Entities.Endereco;
 
 public class EnderecoDAO implements Interface_DAO<Endereco> {
@@ -80,8 +82,28 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 
 	@Override
 	public List<Endereco> list(int limit, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = ConnectionFactory.getConnection();
+		String query = "SELECT * FROM endereco LIMIT ? OFFSET ?";
+		try {
+			PreparedStatement pstm = con.prepareStatement(query);
+			pstm.setInt(0, limit);
+			pstm.setInt(1, offset);
+			ResultSet resultSet = pstm.executeQuery();
+			List<Endereco> list = new ArrayList();
+			Endereco endereco;
+			while(resultSet.next()) {
+				int id_fornecedor = resultSet.getInt("id");
+				String uf = resultSet.getString("UF");
+				String municipio = resultSet.getString("municipio");
+				String rua = resultSet.getString("rua");
+				int numero = resultSet.getInt("numero");
+				endereco = new Endereco(id_fornecedor, uf, municipio, rua, numero);
+				list.add(endereco);
+			}
+			return list;
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -91,13 +113,13 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setInt(0, id);
-			ResultSet result = pstm.executeQuery();
-			if(result.next()) {
-				int id_fornecedor = result.getInt("id");
-				String uf = result.getString("UF");
-				String municipio = result.getString("municipio");
-				String rua = result.getString("rua");
-				int numero = result.getInt("numero");
+			ResultSet resultSet = pstm.executeQuery();
+			if(resultSet.next()) {
+				int id_fornecedor = resultSet.getInt("id");
+				String uf = resultSet.getString("UF");
+				String municipio = resultSet.getString("municipio");
+				String rua = resultSet.getString("rua");
+				int numero = resultSet.getInt("numero");
 				Endereco endereco = new Endereco(id_fornecedor, uf, municipio, rua, numero);
 				return endereco;
 			}

@@ -1,13 +1,16 @@
 package DAO;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Entities.Categoria;
+import Entities.Endereco;
 import Entities.Fornecedor;
 
 public class FornecedorDAO implements Interface_DAO<Fornecedor> {
@@ -72,28 +75,66 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 	@Override
 	public List<Fornecedor> list(int limit, int offset){
 		Connection con = ConnectionFactory.getConnection();
-		return null;
+		String query = "SELECT * FROM fornecedores LIMIT ? OFFSET ?";
+		try {
+			PreparedStatement pstm = con.prepareStatement(query);
+			pstm.setInt(0, limit);
+			pstm.setInt(1, offset);
+			ResultSet resultSet = pstm.executeQuery();
+			List<Fornecedor> list = new ArrayList();
+			Fornecedor fornecedor;
+			Endereco endereco_fornecedor;
+			while(resultSet.next()) {
+				int id_fornecedor = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				String cnpj = resultSet.getString("cnpj");
+				String email = resultSet.getString("email");
+				String telefone = resultSet.getString("telefone");
+				int id_endereco = resultSet.getInt("id_endereco");
+				String UF = resultSet.getString("UF");
+				String municipio = resultSet.getString("municipio");
+				String rua = resultSet.getString("rua");
+				int numero = resultSet.getInt("numero");
+				endereco_fornecedor = new Endereco(id_endereco, UF, municipio, rua, numero);
+				fornecedor = new Fornecedor(id_fornecedor, nome, cnpj, endereco_fornecedor, email, telefone);
+				list.add(fornecedor);
+			}
+			return list;
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}catch(IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	//TODO: Fazer join nessa select para criar o endereço
 	@Override
 	public Fornecedor get(int id) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "SELECT * FROM fornecedores WHERE id = ?";
+		String query = "SELECT * FROM fornecedores f WHERE id = ? INNER JOIN endereco e ON f.id_endereco = e.id ";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setInt(0, id);
-			ResultSet result = pstm.executeQuery();
-			if(result.next()) {
-				int id_fornecedor = result.getInt("id");
-				String nome = result.getString("nome");
-				String cnpj = result.getString("cnpj");
-				String email = result.getString("email");
-				String telefone = result.getString("telefone");
-//				Fornecedor fornecedor = new Fornecedor(id_fornecedor, nome, cnpj, null, email, telefone);
-//				return fornecedor;
+			ResultSet resultSet = pstm.executeQuery();
+			if(resultSet.next()) {
+				int id_fornecedor = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				String cnpj = resultSet.getString("cnpj");
+				String email = resultSet.getString("email");
+				String telefone = resultSet.getString("telefone");
+				int id_endereco = resultSet.getInt("id_endereco");
+				String UF = resultSet.getString("UF");
+				String municipio = resultSet.getString("municipio");
+				String rua = resultSet.getString("rua");
+				int numero = resultSet.getInt("numero");
+				Endereco endereco_fornecedor = new Endereco(id_endereco, UF, municipio, rua, numero);
+				Fornecedor fornecedor = new Fornecedor(id_fornecedor, nome, cnpj, endereco_fornecedor, email, telefone);
+				return fornecedor;
 			}
 		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		catch(IOException e) {
 			throw new RuntimeException(e);
 		}
 		return null;

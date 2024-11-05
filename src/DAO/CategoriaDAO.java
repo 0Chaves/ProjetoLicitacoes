@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Entities.Categoria;
@@ -72,8 +73,26 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 
 	@Override
 	public List list(int limit, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = ConnectionFactory.getConnection();
+		String query = "SELECT * FROM categorias LIMIT ? OFFSET ?";
+		try {
+			PreparedStatement pstm = con.prepareStatement(query);
+			pstm.setInt(0, limit);
+			pstm.setInt(1, offset);
+			ResultSet resultSet = pstm.executeQuery();
+			List<Categoria> list = new ArrayList();
+			Categoria categoria;
+			while(resultSet.next()) {
+				int id_categoria = resultSet.getInt("id");
+				String nome_categoria = resultSet.getString("nome");
+				categoria = new Categoria(id_categoria, nome_categoria);
+				list.add(categoria);
+			}
+			return list;
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		//Por que não pode retornar null?????
 	}
 
 	@Override
@@ -83,11 +102,11 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setInt(0, id);
-			ResultSet result = pstm.executeQuery();
-			if(result.next()) {
-				int id_categoria = result.getInt("id");
-				String nome = result.getString("nome");
-				Categoria categoria = new Categoria(id_categoria, nome);
+			ResultSet resultSet = pstm.executeQuery();
+			if(resultSet.next()) {
+				int id_categoria = resultSet.getInt("id");
+				String nome_categoria = resultSet.getString("nome");
+				Categoria categoria = new Categoria(id_categoria, nome_categoria);
 				return categoria;
 			}
 		}catch(SQLException e) {
