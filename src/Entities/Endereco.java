@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class Endereco {
@@ -11,10 +12,14 @@ public class Endereco {
 	
 	//Construtor para cadastrar um novo fornecedor (id gerado pelo BD)
 	public Endereco (String UF, String municipio, String rua, int numero) {
-		setUF(UF);
-		setMunicipio(municipio);
-		setRua(rua);
-		setNumero(numero);
+		try {
+			setUF(UF);
+			setMunicipio(municipio);
+			setRua(rua);
+			setNumero(numero);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//Construtor para buscar um fornecedor (recupera o id fornecido pelo BD)
@@ -50,7 +55,8 @@ public class Endereco {
 	private void setRua(String rua) {
 		this.rua = rua;
 	}
-	private void setNumero(int numero) {
+	private void setNumero(int numero) throws IOException {
+		if(numero <= 0) throw new IOException("O numero nao pode ser negativo");
 		this.numero = numero;
 	}
 	public void setId(int id) {
