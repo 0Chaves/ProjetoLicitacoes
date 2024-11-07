@@ -19,10 +19,10 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		String query = "INSERT INTO endereco (\"UF\", municipio, rua, numero) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getUF());
-			pstm.setString(1, object.getMunicipio());
-			pstm.setString(2, object.getRua());
-			pstm.setInt(3, object.getNumero());
+			pstm.setString(1, object.getUF());
+			pstm.setString(2, object.getMunicipio());
+			pstm.setString(3, object.getRua());
+			pstm.setInt(4, object.getNumero());
 			pstm.execute();
 			ResultSet generated_id = pstm.getResultSet();
 			if(generated_id.next()) {
@@ -37,6 +37,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
+		
 		/*TODO:
 		 * Criar outras Exceptions para retornar False caso ocorra invalidação de input
 		 * 
@@ -50,7 +51,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		String query = "DELETE FROM endereco WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			return pstm.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -68,11 +69,11 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		String query = "UPDATE endereco SET \"UF\" = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getUF());
-			pstm.setString(1, object.getMunicipio());
-			pstm.setString(2, object.getRua());
-			pstm.setInt(3, object.getNumero());
-			pstm.setInt(4, object.getId());
+			pstm.setString(1, object.getUF());
+			pstm.setString(2, object.getMunicipio());
+			pstm.setString(3, object.getRua());
+			pstm.setInt(4, object.getNumero());
+			pstm.setInt(5, object.getId());
 			pstm.execute();
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -86,8 +87,8 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		String query = "SELECT * FROM endereco LIMIT ? OFFSET ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, limit);
-			pstm.setInt(1, offset);
+			pstm.setInt(1, limit);
+			pstm.setInt(2, offset);
 			ResultSet resultSet = pstm.executeQuery();
 			List<Endereco> list = new ArrayList();
 			Endereco endereco;
@@ -112,7 +113,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 		String query = "SELECT * FROM endereco WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			ResultSet resultSet = pstm.executeQuery();
 			if(resultSet.next()) {
 				int id_fornecedor = resultSet.getInt("id");

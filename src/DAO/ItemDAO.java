@@ -17,10 +17,10 @@ public class ItemDAO implements Interface_DAO<Item> {
 			try {
 				String query = "INSERT INTO itens (descricao, valor_unitario, id_fornecedor, id_categoria) VALUES (?,?,?,?)";
 				PreparedStatement pstm = con.prepareStatement(query);
-				pstm.setString(0, object.getDescricao());
-				pstm.setDouble(1, object.getValor_unitario());
-				pstm.setInt(2, object.getFornecedor().getId());
-				pstm.setInt(3, object.getCategoria().getId());
+				pstm.setString(1, object.getDescricao());
+				pstm.setDouble(2, object.getValor_unitario());
+				pstm.setInt(3, object.getFornecedor().getId());
+				pstm.setInt(4, object.getCategoria().getId());
 				pstm.execute();
 			}catch(SQLException e) {
 				throw new RuntimeException(e);
@@ -35,7 +35,7 @@ public class ItemDAO implements Interface_DAO<Item> {
 		String query = "DELETE FROM itens WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			return pstm.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -49,11 +49,11 @@ public class ItemDAO implements Interface_DAO<Item> {
 		String query = "UPDATE itens SET descricao = ?, valor_unitario = ?, id_fornecedor = ?, id_categoria = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getDescricao());
-			pstm.setDouble(1, object.getValor_unitario());
-			pstm.setInt(2, object.getFornecedor().getId());
-			pstm.setInt(3, object.getCategoria().getId());
-			pstm.setInt(4, object.getId());
+			pstm.setString(1, object.getDescricao());
+			pstm.setDouble(2, object.getValor_unitario());
+			pstm.setInt(3, object.getFornecedor().getId());
+			pstm.setInt(4, object.getCategoria().getId());
+			pstm.setInt(5, object.getId());
 			pstm.execute();
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -73,7 +73,7 @@ public class ItemDAO implements Interface_DAO<Item> {
 		String query = "SELECT * FROM itens WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			ResultSet result = pstm.executeQuery();
 			if(result.next()) {
 				int id_item = result.getInt("id");

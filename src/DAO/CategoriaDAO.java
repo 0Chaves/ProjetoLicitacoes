@@ -18,7 +18,7 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		String query = "INSERT INTO categorias (nome) VALUES (?)";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getNome());
+			pstm.setString(1, object.getNome());
 			pstm.execute();
 			ResultSet generated_id = pstm.getResultSet();
 			if(generated_id.next()) {
@@ -48,7 +48,7 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		String query = "DELETE FROM categorias WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			return pstm.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -62,8 +62,8 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		String query = "UPDATE categorias SET nome = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getNome());
-			pstm.setInt(1, object.getId());
+			pstm.setString(1, object.getNome());
+			pstm.setInt(2, object.getId());
 			pstm.execute();
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -77,8 +77,8 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		String query = "SELECT * FROM categorias LIMIT ? OFFSET ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, limit);
-			pstm.setInt(1, offset);
+			pstm.setInt(1, limit);
+			pstm.setInt(2, offset);
 			ResultSet resultSet = pstm.executeQuery();
 			List<Categoria> list = new ArrayList();
 			Categoria categoria;
@@ -101,7 +101,7 @@ public class CategoriaDAO implements Interface_DAO<Categoria>{
 		String query = "SELECT * FROM categorias WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			ResultSet resultSet = pstm.executeQuery();
 			if(resultSet.next()) {
 				int id_categoria = resultSet.getInt("id");

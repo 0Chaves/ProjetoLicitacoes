@@ -17,7 +17,7 @@ public class Endereco {
 			setMunicipio(municipio);
 			setRua(rua);
 			setNumero(numero);
-		}catch(IOException e) {
+		}catch(IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}
@@ -55,8 +55,8 @@ public class Endereco {
 	private void setRua(String rua) {
 		this.rua = rua;
 	}
-	private void setNumero(int numero) throws IOException {
-		if(numero <= 0) throw new IOException("O numero nao pode ser negativo");
+	private void setNumero(int numero) throws IllegalArgumentException {
+		if(numero <= 0) throw new IllegalArgumentException("O numero nao pode ser negativo");
 		this.numero = numero;
 	}
 	public void setId(int id) {

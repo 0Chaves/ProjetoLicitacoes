@@ -22,11 +22,11 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 			try {
 				String query = "INSERT INTO fornecedores (nome, cnpj, id_endereco, email, telefone) VALUES (?,?,?,?,?)";
 				PreparedStatement pstm = con.prepareStatement(query);
-				pstm.setString(0, object.getNome());
-				pstm.setString(1, object.getCnpj());
-				pstm.setInt(2, object.getEndereco().getId());
-				pstm.setString(3, object.getEmail());
-				pstm.setString(4, object.getTelefone());
+				pstm.setString(1, object.getNome());
+				pstm.setString(2, object.getCnpj());
+				pstm.setInt(3, object.getEndereco().getId());
+				pstm.setString(4, object.getEmail());
+				pstm.setString(5, object.getTelefone());
 				pstm.execute();
 			}catch(SQLException e) {
 				throw new RuntimeException(e);
@@ -42,7 +42,7 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		String query = "DELETE FROM fornecedores WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			return pstm.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -60,11 +60,11 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		String query = "UPDATE fornecedores SET nome = ?,cnpj = ?, email = ?, telefone = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setString(0, object.getNome());
-			pstm.setString(1, object.getCnpj());
-			pstm.setString(2, object.getEmail());
-			pstm.setString(3, object.getTelefone());
-			pstm.setInt(4, object.getId());
+			pstm.setString(1, object.getNome());
+			pstm.setString(2, object.getCnpj());
+			pstm.setString(3, object.getEmail());
+			pstm.setString(4, object.getTelefone());
+			pstm.setInt(5, object.getId());
 			pstm.execute();
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -78,8 +78,8 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		String query = "SELECT * FROM fornecedores LIMIT ? OFFSET ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, limit);
-			pstm.setInt(1, offset);
+			pstm.setInt(1, limit);
+			pstm.setInt(2, offset);
 			ResultSet resultSet = pstm.executeQuery();
 			List<Fornecedor> list = new ArrayList();
 			Fornecedor fornecedor;
@@ -114,7 +114,7 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		String query = "SELECT * FROM fornecedores f WHERE id = ? INNER JOIN endereco e ON f.id_endereco = e.id ";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
-			pstm.setInt(0, id);
+			pstm.setInt(1, id);
 			ResultSet resultSet = pstm.executeQuery();
 			if(resultSet.next()) {
 				int id_fornecedor = resultSet.getInt("id");
