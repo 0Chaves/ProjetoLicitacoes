@@ -1,6 +1,8 @@
 package model;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Categoria {
 	private int id;
@@ -10,7 +12,7 @@ public class Categoria {
 	public Categoria(String nome) {
 		try {
 			setNome(nome);
-		}catch(IOException e) {
+		}catch(IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 		
@@ -31,9 +33,11 @@ public class Categoria {
 	}
 
 	//SETTERS
-	private void setNome(String nome) throws IOException {
+	private void setNome(String nome) throws IllegalArgumentException{
 		//Verificar se possui espaço no nome e dar erro caso possua
-		if(nome.indexOf(" ") == -1) throw new IOException("A categoria deve ser um unico nome");
+		Pattern pattern = Pattern.compile(" ");
+		Matcher matcher = pattern.matcher(nome);
+		if(matcher.find()) throw new IllegalArgumentException("A categoria deve ser um unico nome");
 		this.nome = nome.toUpperCase();
 	}
 	public void setId(int id) {
