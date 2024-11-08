@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import Entities.Item;
+import factory.ConnectionFactory;
+import model.Item;
 
 public class ItemDAO implements Interface_DAO<Item> {
 

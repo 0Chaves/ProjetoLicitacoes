@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entities.Categoria;
+import factory.ConnectionFactory;
+import model.Categoria;
 
 public class CategoriaDAO implements Interface_DAO<Categoria>{
 

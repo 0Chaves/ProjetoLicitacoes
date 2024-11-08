@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entities.Categoria;
-import Entities.Endereco;
-import Entities.Fornecedor;
+import factory.ConnectionFactory;
+import model.Categoria;
+import model.Endereco;
+import model.Fornecedor;
 
 public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 	

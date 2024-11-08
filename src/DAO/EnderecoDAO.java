@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entities.Categoria;
-import Entities.Endereco;
+import factory.ConnectionFactory;
+import model.Categoria;
+import model.Endereco;
 
 public class EnderecoDAO implements Interface_DAO<Endereco> {
 

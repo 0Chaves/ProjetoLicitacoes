@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
 
-import DAO.FornecedorDAO;
+import dao.FornecedorDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
+import model.Endereco;
+import model.Fornecedor;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.input.KeyEvent;
-import Entities.Endereco;
-import Entities.Fornecedor;
 
 public class TelaFornecedorController {
 
