@@ -4,6 +4,6 @@ module ProjetoLicitacoes {
 	requires javafx.fxml;
 	requires javafx.graphics;
 	
-	opens controller to javafx.graphics, javafx.fxml;
+	opens Controller to javafx.graphics, javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml;
 }

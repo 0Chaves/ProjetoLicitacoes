@@ -1,8 +1,8 @@
-package controller;
+package Controller;
 
 import java.io.IOException;
 
-import dao.FornecedorDAO;
+import DAO.FornecedorDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
