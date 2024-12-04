@@ -8,7 +8,7 @@ public class ConnectionFactory {
 	//Tenta estabelecer conexão com o banco de dados. Retorna a conexão caso bem sucedida.
 	public static Connection getConnection() {
 		String login = "postgres";
-		String senha = "postgres";
+		String senha = "ifrs";
 		String urlcon = "jdbc:postgresql://localhost:5432/projeto";
 		try {
 			return DriverManager.getConnection(urlcon, login, senha);
