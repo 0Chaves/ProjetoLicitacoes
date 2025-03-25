@@ -17,17 +17,17 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 	@Override
 	public boolean insert(Endereco object) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "INSERT INTO endereco (\"UF\", municipio, rua, numero) VALUES (?,?,?,?)";
+		String query = "INSERT INTO endereco (uf, municipio, rua, numero) VALUES (?,?,?,?)";
 		try {
-			PreparedStatement pstm = con.prepareStatement(query);
+			PreparedStatement pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, object.getUF());
 			pstm.setString(2, object.getMunicipio());
 			pstm.setString(3, object.getRua());
 			pstm.setInt(4, object.getNumero());
 			pstm.execute();
-			ResultSet generated_id = pstm.getResultSet();
+			ResultSet generated_id = pstm.getGeneratedKeys();
 			if(generated_id.next()) {
-				object.setId(generated_id.getInt("id"));
+				object.setId(generated_id.getInt(1));
 			}
 			generated_id.close();
 			
@@ -67,7 +67,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 	@Override
 	public boolean update(Endereco object) {
 		Connection con = ConnectionFactory.getConnection();
-		String query = "UPDATE endereco SET \"UF\" = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
+		String query = "UPDATE endereco SET uf = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
 		try {
 			PreparedStatement pstm = con.prepareStatement(query);
 			pstm.setString(1, object.getUF());
@@ -95,7 +95,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 			Endereco endereco;
 			while(resultSet.next()) {
 				int id_fornecedor = resultSet.getInt("id");
-				String uf = resultSet.getString("UF");
+				String uf = resultSet.getString("uf");
 				String municipio = resultSet.getString("municipio");
 				String rua = resultSet.getString("rua");
 				int numero = resultSet.getInt("numero");
@@ -118,7 +118,7 @@ public class EnderecoDAO implements Interface_DAO<Endereco> {
 			ResultSet resultSet = pstm.executeQuery();
 			if(resultSet.next()) {
 				int id_fornecedor = resultSet.getInt("id");
-				String uf = resultSet.getString("UF");
+				String uf = resultSet.getString("uf");
 				String municipio = resultSet.getString("municipio");
 				String rua = resultSet.getString("rua");
 				int numero = resultSet.getInt("numero");

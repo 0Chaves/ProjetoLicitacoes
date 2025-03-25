@@ -20,7 +20,7 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
     private static final String UPDATE_QUERY = "UPDATE fornecedores SET nome = ?, cnpj = ?, email = ?, telefone = ? WHERE id = ?";
     private static final String SELECT_QUERY = "SELECT * FROM fornecedores f INNER JOIN endereco e ON f.id_endereco = e.id WHERE f.id = ?";
     private static final String LIST_QUERY = "SELECT * FROM fornecedores LIMIT ? OFFSET ?";
-    private static final String UPDATE_ENDERECO_QUERY = "UPDATE endereco SET UF = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
+    private static final String UPDATE_ENDERECO_QUERY = "UPDATE endereco SET uf = ?, municipio = ?, rua = ?, numero = ? WHERE id = ?";
 
 
 	/**
@@ -174,7 +174,7 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
         String email = resultSet.getString("email");
         String telefone = resultSet.getString("telefone");
         int id_endereco = resultSet.getInt("id_endereco");
-        String UF = resultSet.getString("UF");
+        String UF = resultSet.getString("uf");
         String municipio = resultSet.getString("municipio");
         String rua = resultSet.getString("rua");
         int numero = resultSet.getInt("numero");
